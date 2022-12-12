@@ -79,6 +79,8 @@ void CodeEditorWindow::on_draw()
     float errorY0;
     std::string error = "";
 
+    if (cursorLine >= lines.size()) cursorLine = lines.size() - 1;
+
     size_t i = 0;
     for(ColorizedLine line : text)
     {
