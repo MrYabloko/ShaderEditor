@@ -1,7 +1,7 @@
 #ifndef SHADEREDITOR_PRIMITIVES_H
 #define SHADEREDITOR_PRIMITIVES_H
 
-#include "Vertex.h"
+#include "../resource_manager/Vertex.h"
 #include <glm/glm.hpp>
 #include <vector>
 

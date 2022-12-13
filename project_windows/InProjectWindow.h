@@ -17,8 +17,9 @@ protected:
     virtual const char* get_name() = 0;
 public:
     void init(Project* prj, unsigned int _id) { this->project = prj; drawId = _id; }
+    std::string get_id() { return "###PrjWindow_" + std::to_string(drawId); };
     void draw() {
-        ImGui::Begin((std::string(get_name()) + "###PrjWindow_" + std::to_string(drawId)).c_str(), nullptr, get_imgui_flags());
+        ImGui::Begin((std::string(get_name()) + get_id()).c_str(), nullptr, get_imgui_flags());
         on_draw(); ImGui::End(); }
     Project* get_project() { return project; }
 };

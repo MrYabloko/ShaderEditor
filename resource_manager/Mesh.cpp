@@ -50,6 +50,8 @@ void Mesh::draw()
 
 Mesh::~Mesh()
 {
+    if (vertices.empty() || indices.empty()) return;
+
     //glDeleteVertexArrays(1, &VAO);
     //glDeleteBuffers(1, &VBO);
     //glDeleteBuffers(1, &EBO);

@@ -50,42 +50,46 @@ void Project::show_windows(ImGuiID dockSpaceID)
 {
     if(firstShow)
     {
-        //static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
-
-        //ImGui::DockBuilderRemoveNode(dockSpaceID);
-        //ImGui::DockBuilderAddNode(dockSpaceID, dockspace_flags | ImGuiDockNodeFlags_DockSpace);
-        //ImGui::DockBuilderSetNodeSize(dockSpaceID, ImGui::GetMainViewport()->Size);
-
-        //ImGuiID inspectorDock = ImGui::DockBuilderSplitNode(dockSpaceID, ImGuiDir_Left,
-        //    0.25f, nullptr, &dockSpaceID);
-        //ImGuiID previewDock = ImGui::DockBuilderSplitNode(dockSpaceID, ImGuiDir_Right,
-        //    0.25f, nullptr, &dockSpaceID);
-
         unsigned int id = 0;
 
+        ImGui::SetNextWindowDockID(0);
         CodeEditorWindow* codeEditor = new CodeEditorWindow();
         codeEditor->init(this, id);
         codeEditor->draw();
         windows.push_back(codeEditor);
         id++;
 
+        ImGui::SetNextWindowDockID(0);
         PreviewWindow* preview = new PreviewWindow();
         preview->init(this, id);
         preview->draw();
-        //ImGui::DockBuilderDockWindow(("###PrjWindow_" + std::to_string(id)).c_str(), previewDock);
         previewWindow = preview;
         windows.push_back(preview);
         id++;
 
+        ImGui::SetNextWindowDockID(0);
         InspectorWindow* inspector = new InspectorWindow();
         inspector->init(this, id);
-        //ImGui::SetNextWindowDockID(dockSpaceID);
         inspector->draw();
-        //ImGui::DockBuilderDockWindow(("###PrjWindow_" + std::to_string(id)).c_str(), inspectorDock);
         windows.push_back(inspector);
         id++;
 
-        //ImGui::DockBuilderFinish(dockSpaceID);
+        for (ImGuiWindow* wnd : ImGui::DockBuilderGetNode(dockSpaceID)->Windows)
+        {
+            ImGui::SetWindowDock(wnd, 0, 0);
+        }
+
+        //firstShow = false; return;
+
+        ImGuiID dockRightOfInspector = dockSpaceID;
+        ImGuiID dockInspector = ImGui::DockBuilderSplitNode(dockRightOfInspector, ImGuiDir_Left, 0.25f, nullptr, &dockRightOfInspector);
+        ImGuiID dockCodeEditor = ImGui::DockBuilderSplitNode(dockRightOfInspector, ImGuiDir_Left, 0.5f, nullptr, &dockRightOfInspector);
+
+        ImGui::DockBuilderDockWindow(inspector->get_id().c_str(), dockInspector);
+        ImGui::DockBuilderDockWindow(codeEditor->get_id().c_str(), dockCodeEditor);
+        ImGui::DockBuilderDockWindow(preview->get_id().c_str(), dockRightOfInspector);
+
+        ImGui::DockBuilderFinish(dockRightOfInspector);
 
         firstShow = false;
     }

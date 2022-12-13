@@ -1,7 +1,7 @@
 #ifndef SHADEREDITOR_EDITABLESHADER_H
 #define SHADEREDITOR_EDITABLESHADER_H
 
-#include "Shader.h"
+#include "../resource_manager/Shader.h"
 #include <vector>
 #include <string>
 

@@ -2,9 +2,9 @@
 #define SHADEREDITOR_PREVIEWWINDOW_H
 
 #include "InProjectWindow.h"
-#include "../utils/RenderTexture.h"
-#include "../utils/Mesh.h"
-#include "../utils/Shader.h"
+#include "../resource_manager/RenderTexture.h"
+#include "../resource_manager/Mesh.h"
+#include "../resource_manager/Shader.h"
 #include "../utils/Camera.h"
 
 struct CameraSettings

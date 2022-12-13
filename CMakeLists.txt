@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 file(GLOB_RECURSE IMGUI_FILES external/imgui/*.cpp)
 
 add_executable(ShaderEditor main.cpp
-        ${IMGUI_FILES} Project.cpp Project.h project_windows/InProjectWindow.h project_windows/InspectorWindow.cpp project_windows/InspectorWindow.h project_windows/PreviewWindow.cpp project_windows/PreviewWindow.h project_windows/CodeEditorWindow.cpp project_windows/CodeEditorWindow.h utils/RenderTexture.cpp utils/RenderTexture.h utils/Camera.cpp utils/Camera.h utils/Mesh.cpp utils/Mesh.h utils/Vertex.h utils/Shader.cpp utils/Shader.h utils/primitives.h utils/primitives.cpp utils/global_vars.h utils/global_vars.cpp utils/EditableShader.h utils/EditableShader.cpp "code_analyzer/CodeAnalyzer.cpp" "code_analyzer/CodeAnalyzer.h" "code_analyzer/StringHandler.cpp" "code_analyzer/StringHandler.h")
+        ${IMGUI_FILES} Project.cpp Project.h project_windows/InProjectWindow.h project_windows/InspectorWindow.cpp project_windows/InspectorWindow.h project_windows/PreviewWindow.cpp project_windows/PreviewWindow.h project_windows/CodeEditorWindow.cpp project_windows/CodeEditorWindow.h "resource_manager/RenderTexture.cpp" "resource_manager/RenderTexture.h" utils/Camera.cpp utils/Camera.h "resource_manager/Mesh.cpp" "resource_manager/Mesh.h" "resource_manager/Vertex.h" "resource_manager/Shader.cpp" "resource_manager/Shader.h" utils/primitives.h utils/primitives.cpp utils/global_vars.h utils/global_vars.cpp utils/EditableShader.h utils/EditableShader.cpp "code_analyzer/CodeAnalyzer.cpp" "code_analyzer/CodeAnalyzer.h" "code_analyzer/StringHandler.cpp" "code_analyzer/StringHandler.h"   )
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

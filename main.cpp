@@ -10,6 +10,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <fstream>
+
 #include "Project.h"
 
 Project* opened_project = nullptr;
@@ -71,21 +73,13 @@ void draw_imgui(GLFWwindow* window)
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - menuBarHeight));
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + menuBarHeight));
 
-    // ImGui::Begin("###MainWindow", NULL,
-    //             ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove
-    //             | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus);
-
-     //ImGui::End();
-
-    //ImGuiID dockID = ImGui::GetID("###MainWindow");
     ImGuiID dockID = ImGui::DockSpaceOverViewport();
 
     if(opened_project != nullptr) opened_project->show_windows(dockID);
-
-  //  ImGui::End();
 }
 
-int main() {
+int main()
+{
 
 #pragma region OpenGlInit
     glfwInit();
@@ -112,6 +106,7 @@ int main() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.IniFilename = NULL;
 
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
